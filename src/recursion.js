@@ -99,10 +99,8 @@ var sumBelow = function(n) {
 // range(2,9); // [3,4,5,6,7,8]
 var range = function(x, y) {
   // make sure x will approach y
-  let incrementer;
-  if (y > x) {
-    incrementer = 1;
-  } else {
+  let incrementer = 1;
+  if (y < x) {
     incrementer = -1;
   }
 
@@ -120,6 +118,26 @@ var range = function(x, y) {
 // exponent(4,3); // 64
 // https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/computing-powers-of-a-number
 var exponent = function(base, exp) {
+  if (exp === 0) {
+    return 1;
+  }
+
+  if (exp === 1) {
+    return base;
+  }
+
+  // deal with negatives: re-run this, and take the inverse
+  if (exp < 0) {
+    return 1 / exponent(base, -exp);
+  }
+
+  // optimize for even exponents:
+  if (isEven(exp)) {
+    let halfOfThisTotal = exponent(base, exp / 2);
+    return halfOfThisTotal * halfOfThisTotal;
+  }
+
+  return base * exponent(base, exp - 1);
 };
 
 // 8. Determine if a number is a power of two.
