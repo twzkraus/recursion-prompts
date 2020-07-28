@@ -79,6 +79,20 @@ var isEven = function(n) {
 // sumBelow(10); // 45
 // sumBelow(7); // 21
 var sumBelow = function(n) {
+  if (n === 0) {
+    return 0;
+  }
+
+  let multiplier = 1;
+
+  // negative number: make multiplier -1 to make overall result negative
+  // turn n into its abs
+  if (n < 0) {
+    n = Math.abs(n);
+    multiplier = -1;
+  }
+
+  return multiplier * (n-1 + sumBelow(n-1));
 };
 
 // 6. Get the integers within a range (x, y).
