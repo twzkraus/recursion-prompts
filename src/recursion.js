@@ -590,6 +590,17 @@ var minimizeZeroes = function(array) {
 // alternateSign([2,7,8,3,1,4]) // [2,-7,8,-3,1,-4]
 // alternateSign([-2,-7,8,3,-1,4]) // [2,-7,8,-3,1,-4]
 var alternateSign = function(array) {
+  if (array.length === 0) {
+    return [];
+  }
+
+  let el1 = Math.abs(array[0]);
+  let el2 = Math.abs(array[1]);
+  if (array.length === 1) {
+    return [el1];
+  }
+
+  return [el1, -el2].concat(alternateSign(array.slice(2)));
 };
 
 // 36. Given a string, return a string with digits converted to their word equivalent.
