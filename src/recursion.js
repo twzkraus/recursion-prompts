@@ -275,6 +275,19 @@ var divide = function(x, y) {
 // http://www.cse.wustl.edu/~kjg/cse131/Notes/Recursion/recursion.html
 // https://www.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/the-euclidean-algorithm
 var gcd = function(x, y) {
+  if (x < 0 || y < 0) {
+    return null;
+  }
+  if (x === 0) {
+    return y;
+  }
+  if (y === 0) {
+    return x;
+  }
+  if (x > y) {
+    return gcd(x % y, y);
+  }
+  return gcd(x, y % x);
 };
 
 // 15. Write a function that compares each character of two strings and returns true if
@@ -626,6 +639,16 @@ var numToText = function(str) {
 
 // 37. Return the number of times a tag occurs in the DOM.
 var tagCount = function(tag, node) {
+  let pointyTag = '<' + tag + '>';
+  if (!$('body')) {
+    return 0;
+  }
+  let idxFound = $('body').indexOf(pointyTag);
+  if (idxFound >= 0) {
+    return 1 + tagCount(tag, $('body').slice(idxFound + 1));
+  } else {
+    return 0;
+  }
 };
 
 // 38. Write a function for binary search.
